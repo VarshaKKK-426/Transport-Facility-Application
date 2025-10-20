@@ -28,9 +28,7 @@
             <p><strong>Pickup:</strong> {{ ride.pickUpPoint }} | <strong>Destination:</strong> {{ ride.destination }}
             </p>
             <button type="button" (click)="bookRide(ride)" [disabled]="
-        ride.vacantSeats === 0 ||
-        ride.employeeId === employeeIdForBooking
-      ">
+        ride.vacantSeats === 0">
                 Book Ride
             </button>
         </div>

@@ -1,7 +1,9 @@
 
 <div class="home-container">
-   <button class="logout-btn" (click)="logout()">Logout</button>
-  <div class="top-buttons">
+ <div class="header">
+    <span class="welcome-msg">Welcome Employee Id : {{ employeeId }}</span>
+    <button class="logout-btn" (click)="logout()">Logout</button>
+  </div>  <div class="top-buttons">
     <button (click)="addNewRide()">Add New Ride</button>
     <button (click)="findRide()">Find Ride</button>
   </div>

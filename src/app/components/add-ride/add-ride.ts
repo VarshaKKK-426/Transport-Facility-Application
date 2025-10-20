@@ -38,22 +38,51 @@ ngOnInit() {
 
   this.isEmployeeIdDisabled = !!alreadyHasRide;
 }
+  // addNewRide() {
+  //   const currentDate = new Date();
+  //   const today = currentDate.toISOString().split('T')[0];
+  //   const ride = {
+  //     ...this.newRide,
+  //     date: today,
+  //     bookedEmployees: []
+  //   }
+
+  //   this.existingRide.push(ride)
+  //   this.rideAdded.emit(ride);
+  //   sessionStorage.setItem('rides', JSON.stringify(this.existingRide));
+  //   console.log(this.newRide, this.existingRide)
+  //   alert('Ride added successfully!');
+  //   this.newRide = {};
+  // }
+
   addNewRide() {
-    const currentDate = new Date();
-    const today = currentDate.toISOString().split('T')[0];
-    const ride = {
-      ...this.newRide,
-      date: today,
-      bookedEmployees: []
-    }
-   
-    this.existingRide.push(ride)
-    this.rideAdded.emit(ride);
-    sessionStorage.setItem('rides', JSON.stringify(this.existingRide));
-    console.log(this.newRide, this.existingRide)
-    alert('Ride added successfully!');
-    this.newRide = {};
+  const today = new Date().toISOString().split('T')[0]; 
+
+  const rideAtSameTime = this.existingRide.find(
+    ride => 
+      ride.employeeId === this.newRide.employeeId &&
+      ride.date === today &&
+      ride.time === this.newRide.time
+  );
+
+  if (rideAtSameTime) {
+    alert('You already have a ride at this time. Please choose a different time.');
+    return; 
   }
+
+  const ride = {
+    ...this.newRide,
+    date: today,
+    bookedEmployees: []
+  };
+
+  this.existingRide.push(ride);
+  this.rideAdded.emit(ride);
+  sessionStorage.setItem('rides', JSON.stringify(this.existingRide));
+
+  alert('Ride added successfully!');
+  this.newRide = {};
+}
 
   navigateToHome() {
     this.router.navigate(['./home'])

@@ -82,10 +82,10 @@ export class PickRide {
       return;
     }
 
-    if (ride.employeeId === this.employeeIdForBooking) {
-      this.message = 'You cannot book your own ride.';
-      return;
-    }
+    // if (ride.employeeId === this.employeeIdForBooking) {
+    //   this.message = 'You cannot book your own ride.';
+    //   return;
+    // }
 
     if (ride.bookedEmployees.includes(this.employeeIdForBooking)) {
       this.message = 'You have already booked this ride.';

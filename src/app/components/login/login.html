@@ -8,10 +8,15 @@
       #empId="ngModel"
       required
       pattern="^EMP\d{2,}$"
+      autocomplete = "off"
     />
 
+     <div *ngIf="!employeeId" class="info">
+      <small>Please enter your Employee ID to login.</small>
+    </div>
+
     <div *ngIf="empId.invalid && (empId.dirty || empId.touched)" class="error">
-      <small *ngIf="empId.errors?.['required']">Employee ID is required.</small>
+      <!-- <small *ngIf="empId.errors?.['required']">Employee ID is required.</small> -->
       <small *ngIf="empId.errors?.['pattern']">Employee ID must start with 'EMP' followed by at least 2 digits (e.g. EMP01).</small>
     </div>
 
