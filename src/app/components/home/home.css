@@ -1,0 +1,61 @@
+.home-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 100vh;
+  padding: 20px;
+  background-color: #121212;
+  color: #fff;
+  font-family: "Poppins", sans-serif;
+}
+
+.top-buttons {
+  display: flex;
+  gap: 15px; /* space between top buttons */
+  margin-bottom: 20px;
+}
+
+.ride-list {
+  flex: 1;           /* takes remaining space */
+  overflow-y: auto;  /* scroll if content exceeds height */
+  width: 100%;
+  max-width: 450px;  /* optional, aligns with rides width */
+}
+
+.ride-summary {
+  background-color: #1e1e1e;
+  padding: 10px 15px;
+  margin-bottom: 10px;
+  border-radius: 8px;
+  box-shadow: 0 0 8px rgba(0, 255, 150, 0.2);
+}
+
+.bottom-button {
+  margin-top: 20px; /* some spacing from scrollable area */
+}
+
+button {
+  background: linear-gradient(90deg, #00e5a0, #00bfa5);
+  border: none;
+  color: #000;
+  font-weight: 600;
+  padding: 10px 15px;
+  border-radius: 25px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+button:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 10px rgba(0, 255, 150, 0.3);
+}
+
+/* Optional: scrollbar style */
+.ride-list::-webkit-scrollbar {
+  width: 6px;
+}
+
+.ride-list::-webkit-scrollbar-thumb {
+  background-color: #00e5a0;
+  border-radius: 3px;
+}

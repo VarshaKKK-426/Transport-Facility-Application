@@ -1,0 +1,40 @@
+<app-add-ride *ngIf="showAddRide" (rideAdded)="addedRide($event)"></app-add-ride>
+
+<div class="pick-ride-container">
+    <button type="button" (click)="navigateHome()">Back</button>
+    <h2>Available Rides</h2>
+
+    <div class="filter">
+        <label>Filter by Vehicle Type: </label>
+        <select [(ngModel)]="vehicleFilter">
+            <option value="">All</option>
+            <option value="car">Car</option>
+            <option value="bike">Bike</option>
+        </select>
+
+
+        <label>Filter by Time:</label>
+        <input type="time" [(ngModel)]="bookingTime" />
+
+        <button type="button" (click)="clearTimeFilter()">Reset Time</button>
+    </div>
+
+    <div class="ride-cards">
+        <div *ngFor="let ride of filteredRides" class="ride-card">
+            <p><strong>Driver ID:</strong> {{ ride.employeeId }}</p>
+            <p><strong>Vehicle:</strong> {{ ride.vehicleType | titlecase }} ({{ ride.vehicleNo }})</p>
+            <p><strong>Seats Left:</strong> {{ ride.vacantSeats }}</p>
+            <p><strong>Time:</strong> {{ ride.time }}</p>
+            <p><strong>Pickup:</strong> {{ ride.pickUpPoint }} | <strong>Destination:</strong> {{ ride.destination }}
+            </p>
+            <button type="button" (click)="bookRide(ride)" [disabled]="
+        ride.vacantSeats === 0 ||
+        ride.employeeId === employeeIdForBooking
+      ">
+                Book Ride
+            </button>
+        </div>
+    </div>
+
+    <p style="color:green; margin-top:10px;">{{ message }}</p>
+</div>

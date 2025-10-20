@@ -1,0 +1,53 @@
+<!-- <div>
+    <h3>Welcome, Employee Id: <span>{{loginEmployee}}</span></h3>
+
+    <button type="button" (click)="addNewRide()">Add New Ride</button>
+    <button type="button" (click)="findRide()">Find a Ride</button>
+
+    <ul *ngIf="todaysRides.length > 0">
+    <li *ngFor="let ride of todaysRides" class="ride-summary">
+      <strong>Ride ID:</strong> {{ ride.id || ride.vehicleNo }} |
+      {{ ride.vehicleType | titlecase }} |
+      {{ ride.vacantSeats }} seats left <br>
+      <strong>Pickup:</strong> {{ ride.pickUpPoint }} |
+      <strong>Dest:</strong> {{ ride.destination }} |
+      {{ ride.time }}
+    </li>
+  </ul>
+
+  <p *ngIf="todaysRides.length === 0">No rides scheduled for today.</p>
+
+    <button class="logout-btn" (click)="logout()">Logout</button>
+</div> -->
+
+<div class="home-container">
+  <h2>Today's Rides</h2>
+
+  <!-- Top buttons -->
+  <div class="top-buttons">
+    <button (click)="addNewRide()">Add New Ride</button>
+    <button (click)="findRide()">Find Ride</button>
+  </div>
+
+  <!-- Scrollable ride list -->
+  <div class="ride-list">
+    <ul *ngIf="todaysRides.length > 0">
+      <li *ngFor="let ride of todaysRides" class="ride-summary">
+        <strong>Ride ID:</strong> {{ ride.id || ride.vehicleNo }} |
+        {{ ride.vehicleType | titlecase }} |
+        {{ ride.vacantSeats }} seats left <br>
+        <strong>Pickup:</strong> {{ ride.pickUpPoint }} |
+        <strong>Dest:</strong> {{ ride.destination }} |
+        {{ ride.time }}
+      </li>
+    </ul>
+
+    <p *ngIf="todaysRides.length === 0">No rides scheduled for today.</p>
+  </div>
+
+  <!-- Logout at the bottom -->
+  <div class="bottom-button">
+    <button (click)="logout()">Logout</button>
+  </div>
+</div>
+

@@ -1,0 +1,37 @@
+<div class="formContainer">
+    <!-- <h3>Welcome, Employee Id: <span style="color: #fff;">{{newRide.employeeId}}</span></h3> -->
+    <div class="header">
+        <button type="button" class="back-btn" (click)="navigateToHome()">Back</button>
+        <h2>Add New Ride</h2>
+    </div>
+    <div class="formStyle">
+        <form #addRideForm="ngForm" (ngSubmit)="addNewRide()">
+            <label> Employee Id</label>
+            <input type="text" name="employeeId" [(ngModel)]="newRide.employeeId" required />
+
+            <label>Vehicle Type</label>
+            <select name="vehicleType" [(ngModel)]="newRide.vehicleType" required>
+                <option value="bike">Bike</option>
+                <option value="car">Car</option>
+            </select>
+
+            <label>Vehicle No</label>
+            <input type="number" name="vehicleNo" [(ngModel)]="newRide.vehicleNo" required />
+
+            <label>Vacant Seats</label>
+            <input type="number" name="vacantSeats" [(ngModel)]="newRide.vacantSeats" required />
+
+            <label>Time</label>
+            <input type="time" name="time" [(ngModel)]="newRide.time" required />
+
+            <label>Pick-up Point</label>
+            <input type="text" name="pickUpPoint" [(ngModel)]="newRide.pickUpPoint" required />
+
+            <label>Destination</label>
+            <input type="text" name="destination" [(ngModel)]="newRide.destination" required />
+
+            <button type="submit" [disabled]="!addRideForm.form.valid">Add New Ride</button>
+
+        </form>
+    </div>
+</div>
