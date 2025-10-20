@@ -1,5 +1,4 @@
 <div class="formContainer">
-    <!-- <h3>Welcome, Employee Id: <span style="color: #fff;">{{newRide.employeeId}}</span></h3> -->
     <div class="header">
         <button type="button" class="back-btn" (click)="navigateToHome()">Back</button>
         <h2>Add New Ride</h2>
@@ -7,7 +6,7 @@
     <div class="formStyle">
         <form #addRideForm="ngForm" (ngSubmit)="addNewRide()">
             <label> Employee Id</label>
-            <input type="text" name="employeeId" [(ngModel)]="newRide.employeeId" required />
+            <input type="text" name="employeeId" [(ngModel)]="newRide.employeeId" [disabled]="isEmployeeIdDisabled" required />
 
             <label>Vehicle Type</label>
             <select name="vehicleType" [(ngModel)]="newRide.vehicleType" required>
@@ -16,7 +15,7 @@
             </select>
 
             <label>Vehicle No</label>
-            <input type="number" name="vehicleNo" [(ngModel)]="newRide.vehicleNo" required />
+            <input type="text" name="vehicleNo" [(ngModel)]="newRide.vehicleNo" required />
 
             <label>Vacant Seats</label>
             <input type="number" name="vacantSeats" [(ngModel)]="newRide.vacantSeats" required />

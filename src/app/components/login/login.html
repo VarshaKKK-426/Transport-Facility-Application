@@ -1,8 +1,20 @@
 <div class="login-container">
-    <h2>TRANSPORT FACILITY PORTAL</h2>
-    <div class="login-form">
-        <label>Enter Your Employee ID</label>
-        <input type="text" name="employeeId" [(ngModel)]="employeeId" />
-        <button type="button" (click)="login()">LOGIN</button>
+  <form #loginForm="ngForm" (ngSubmit)="login()" class="login-form">
+    <label>Employee Id</label>
+    <input
+      type="text"
+      name="employeeId"
+      [(ngModel)]="employeeId"
+      #empId="ngModel"
+      required
+      pattern="^EMP\d{2,}$"
+    />
+
+    <div *ngIf="empId.invalid && (empId.dirty || empId.touched)" class="error">
+      <small *ngIf="empId.errors?.['required']">Employee ID is required.</small>
+      <small *ngIf="empId.errors?.['pattern']">Employee ID must start with 'EMP' followed by at least 2 digits (e.g. EMP01).</small>
     </div>
+
+    <button type="submit" [disabled]="loginForm.invalid">LOGIN</button>
+  </form>
 </div>

@@ -14,6 +14,8 @@ export class Home {
   showAddRide: boolean = false;
   employeeId: string = '';
   todaysRides: any[] = [];
+  offeredRides: any[] = [];
+  bookedRides: any[] = [];
 
   constructor(private router: Router) {
     this.loginEmployee = JSON.parse(sessionStorage.getItem('employeeId') || '');
@@ -21,7 +23,7 @@ export class Home {
 
   ngOnInit(): void {
     // Load logged-in employee ID
-    const empId = sessionStorage.getItem('employeeId');
+    const empId = JSON.parse(sessionStorage.getItem('employeeId') || '');
     if (empId) this.employeeId = empId;
 
     // Load rides from sessionStorage
@@ -32,6 +34,10 @@ export class Home {
 
       // Filter rides for today
       this.todaysRides = allRides.filter((r: any) => r.date === today);
+      this.offeredRides = this.todaysRides.filter(r => r.employeeId === this.employeeId);
+      this.bookedRides = this.todaysRides.filter(r =>
+        r.bookedEmployees?.includes(this.employeeId)
+      );
     }
   }
 

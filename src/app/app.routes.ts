@@ -1,4 +1,3 @@
-import { AppComponent } from './../../../sample/src/app/app.component';
 import { Component } from '@angular/core';
 import { Routes } from '@angular/router';
 import { AddRide } from './components/add-ride/add-ride';

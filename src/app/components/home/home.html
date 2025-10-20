@@ -1,53 +1,44 @@
-<!-- <div>
-    <h3>Welcome, Employee Id: <span>{{loginEmployee}}</span></h3>
-
-    <button type="button" (click)="addNewRide()">Add New Ride</button>
-    <button type="button" (click)="findRide()">Find a Ride</button>
-
-    <ul *ngIf="todaysRides.length > 0">
-    <li *ngFor="let ride of todaysRides" class="ride-summary">
-      <strong>Ride ID:</strong> {{ ride.id || ride.vehicleNo }} |
-      {{ ride.vehicleType | titlecase }} |
-      {{ ride.vacantSeats }} seats left <br>
-      <strong>Pickup:</strong> {{ ride.pickUpPoint }} |
-      <strong>Dest:</strong> {{ ride.destination }} |
-      {{ ride.time }}
-    </li>
-  </ul>
-
-  <p *ngIf="todaysRides.length === 0">No rides scheduled for today.</p>
-
-    <button class="logout-btn" (click)="logout()">Logout</button>
-</div> -->
 
 <div class="home-container">
-  <h2>Today's Rides</h2>
-
-  <!-- Top buttons -->
+   <button class="logout-btn" (click)="logout()">Logout</button>
   <div class="top-buttons">
     <button (click)="addNewRide()">Add New Ride</button>
     <button (click)="findRide()">Find Ride</button>
   </div>
 
-  <!-- Scrollable ride list -->
-  <div class="ride-list">
-    <ul *ngIf="todaysRides.length > 0">
-      <li *ngFor="let ride of todaysRides" class="ride-summary">
-        <strong>Ride ID:</strong> {{ ride.id || ride.vehicleNo }} |
-        {{ ride.vehicleType | titlecase }} |
-        {{ ride.vacantSeats }} seats left <br>
-        <strong>Pickup:</strong> {{ ride.pickUpPoint }} |
-        <strong>Dest:</strong> {{ ride.destination }} |
-        {{ ride.time }}
-      </li>
-    </ul>
+  <div class="ride-summary-section">
+    <div class="ride-category">
+      <h3>Rides I’m Offering</h3>
+      <ul *ngIf="offeredRides.length > 0; else noOffered">
+        <li *ngFor="let ride of offeredRides">
+          {{ ride.time }} |
+          {{ ride.pickUpPoint }} → {{ ride.destination }} |
+          {{ ride.vehicleType | titlecase }} ({{ ride.vehicleNo }}) |
+          {{ ride.vacantSeats }} seat left
+        </li>
+      </ul>
+      <ng-template #noOffered>
+        <p>No rides offered today.</p>
+      </ng-template>
+    </div>
 
-    <p *ngIf="todaysRides.length === 0">No rides scheduled for today.</p>
-  </div>
+    <hr />
 
-  <!-- Logout at the bottom -->
-  <div class="bottom-button">
-    <button (click)="logout()">Logout</button>
+    <div class="ride-category">
+      <h3>Rides I’ve Booked</h3>
+      <ul *ngIf="bookedRides.length > 0; else noBooked">
+        <li *ngFor="let ride of bookedRides">
+           {{ ride.time }} |
+          {{ ride.pickUpPoint }} → {{ ride.destination }} |
+          {{ ride.vehicleType | titlecase }} ({{ ride.vehicleNo }}) |
+          Driver: {{ ride.employeeId }}
+        </li>
+      </ul>
+      <ng-template #noBooked>
+        <p>No rides booked today.</p>
+      </ng-template>
+    </div>
   </div>
+ 
 </div>
 

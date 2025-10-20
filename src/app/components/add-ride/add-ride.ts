@@ -16,6 +16,7 @@ export class AddRide {
 
   newRide: any = {}
   existingRide: any[] = [];
+  isEmployeeIdDisabled : boolean = false;
 
   constructor(private router: Router) {
     const storedRides = sessionStorage.getItem('rides');
@@ -23,12 +24,20 @@ export class AddRide {
       this.existingRide = JSON.parse(storedRides);
     }
 
-    const empId = sessionStorage.getItem('employeeId');
+    const empId = JSON.parse(sessionStorage.getItem('employeeId') || '');
     if (empId) {
       this.newRide.employeeId = empId;
     }
   }
+ngOnInit() {
+  const storedEmployeeId = JSON.parse(sessionStorage.getItem('employeeId') || '');
+  this.newRide.employeeId = storedEmployeeId;
 
+  const storedRides = JSON.parse(sessionStorage.getItem('rides') || '[]');
+  const alreadyHasRide = storedRides.some((ride: any) => ride.employeeId === storedEmployeeId);
+
+  this.isEmployeeIdDisabled = !!alreadyHasRide;
+}
   addNewRide() {
     const currentDate = new Date();
     const today = currentDate.toISOString().split('T')[0];
@@ -37,11 +46,7 @@ export class AddRide {
       date: today,
       bookedEmployees: []
     }
-    // const existingId = this.existingRide.some((r) => r.employeeId === ride.employeeId  && r.date === today)
-    // if (existingId) {
-    //   alert('Employee already has a ride')
-    //   return
-    // }
+   
     this.existingRide.push(ride)
     this.rideAdded.emit(ride);
     sessionStorage.setItem('rides', JSON.stringify(this.existingRide));

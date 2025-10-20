@@ -21,7 +21,7 @@ export class PickRide {
       const today = new Date().toISOString().split('T')[0];
       this.rideList = allRides.filter((r: any) => r.date === today);
     }
-    const loggedInEmpId = sessionStorage.getItem('employeeId');
+    const loggedInEmpId = JSON.parse(sessionStorage.getItem('employeeId') || '');
     if (loggedInEmpId) {
       this.employeeIdForBooking = loggedInEmpId;
     }
@@ -60,22 +60,12 @@ export class PickRide {
       rides = rides.filter(r => r.vehicleType === this.vehicleFilter);
     }
 
-    // if (this.employeeIdForBooking && this.employeeIdForBooking.trim() !== '') {
-    //   rides = rides.filter(r => r.employeeId
-    //     .toLowerCase()
-    //     .includes(this.employeeIdForBooking.toLowerCase().trim()));
-    // }
-
-    // if (this.employeeIdForBooking === '')
-    //   this.message = ''
-
-    // // 🕒 Filter by booking time ±60 minutes
     if (this.bookingTime) {
       const selectedTime = this.convertToMinutes(this.bookingTime);
       rides = rides.filter(r => {
         const rideTime = this.convertToMinutes(r.time);
         const diff = Math.abs(rideTime - selectedTime);
-        return diff <= 60; // within ±60 minutes
+        return diff <= 60; 
       });
     }
 
@@ -92,32 +82,26 @@ export class PickRide {
       return;
     }
 
-    // Cannot book own ride
     if (ride.employeeId === this.employeeIdForBooking) {
       this.message = 'You cannot book your own ride.';
       return;
     }
 
-    //  Cannot book the same ride twice
     if (ride.bookedEmployees.includes(this.employeeIdForBooking)) {
       this.message = 'You have already booked this ride.';
       return;
     }
 
-    // Cannot book if no vacant seats
     if (ride.vacantSeats <= 0) {
       this.message = 'No vacant seats left for this ride.';
       return;
     }
 
-    // Book the ride
     ride.vacantSeats--;
     ride.bookedEmployees.push(this.employeeIdForBooking);
 
-    // Update rides in sessionStorage
     sessionStorage.setItem('rides', JSON.stringify(this.rideList));
 
-    // Show success message
     this.message = 'Ride booked successfully!';
   }
 
@@ -126,7 +110,7 @@ export class PickRide {
   }
 
   clearTimeFilter() {
-    this.bookingTime = ''; // clears the selected time and resets the filter
+    this.bookingTime = ''; 
   }
 
 
